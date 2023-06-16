@@ -1,0 +1,20 @@
+#include <bits/stdc++.h> 
+void sort012(int *arr, int n)
+{
+   //Three pointer approch
+   // Or we can direct sort the array but it take nlog(n) TC.
+   int p1=0,p0=0,p2=n-1;
+   while(p1<=p2){
+      if(arr[p1]==0){
+         swap(arr[p1],arr[p0]);
+         p0++;
+         p1++; 
+      }
+      else if(arr[p1]==1) p1++;
+      else if(arr[p1]==2){
+         swap(arr[p2],arr[p1]);
+         p2--;
+      }
+   }
+
+}
