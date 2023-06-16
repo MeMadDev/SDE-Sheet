@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    // Function to return a list containing the DFS traversal of the graph.
+    void dfs(int node,vector<int>& ans,vector<bool> & vis,vector<int> adj[]){
+        vis[node]=1;
+        ans.push_back(node);
+        for(auto it:adj[node]){
+            if(vis[it]==0) dfs(it,ans,vis,adj);
+        }
+    }
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        vector<bool> vis(V,0);
+        vector<int> ans;
+        for(int i=0;i<V;i++){
+            if(vis[i]==0) dfs(i,ans,vis,adj);
+        }
+        return ans;
+    }
+};
