@@ -1,0 +1,50 @@
+#include <bits/stdc++.h> 
+long long merge(int l,int mid,int u,long long * arr){
+    long long count=0;
+    vector<int> arr1(u-l+1);
+    int a=l,b=mid+1;
+    int pt=mid+1;
+    for(int k=l;k<=mid;k++){
+            while(pt<=u && arr[k]>arr[pt]) pt++;
+            count+=pt-(mid+1);
+        
+    }
+    for(int i=0;i<arr1.size();i++){
+        if(a<=mid && b<=u){
+            if(arr[a]>arr[b]){
+                arr1[i]=arr[b];
+                b++;
+            }
+            else{
+                arr1[i]=arr[a];
+                a++;
+            }
+        }
+        else if(a<=mid){
+            arr1[i]=arr[a];
+            a++;
+        }
+        else if(b<=u){
+            arr1[i]=arr[b];
+            b++;
+        }
+    }
+    for(int i=0;i<arr1.size();i++){
+        arr[l+i]=arr1[i];
+    }
+    return count;
+    
+}
+long long divide(int l, int u,long long * arr){
+    if(l>=u) return 0;
+    long long count=0;
+    int mid=(l+u)/2;
+    count+=divide(l,mid,arr);
+    count+=divide(mid+1,u,arr);
+    count+=merge(l,mid,u,arr);
+    
+    return count;
+}
+long long getInversions(long long *arr, int n){
+    return divide(0,n-1,arr);
+}
