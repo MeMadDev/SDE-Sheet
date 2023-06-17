@@ -1,0 +1,19 @@
+#include <bits/stdc++.h> 
+#include <bits/stdc++.h> 
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	int r,m;
+    for(int i=0;i<n;i++){
+        int idx=abs(arr[i])-1;
+        if(arr[idx]<0) r=idx+1;
+        else{
+            arr[idx]=-arr[idx];
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(arr[i]>0) m=i+1;
+    }
+    return {m,r};
+	
+}
