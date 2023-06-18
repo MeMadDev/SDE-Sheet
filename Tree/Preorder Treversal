@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> ans;
+    void pret(TreeNode* root){
+        if(root==NULL){
+            return ;
+        }
+        // cout<<root->val;
+        ans.push_back(root->val);
+        preorderTraversal(root->left);
+        preorderTraversal(root->right);
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        pret(root);
+        return ans;
+    }
+};
