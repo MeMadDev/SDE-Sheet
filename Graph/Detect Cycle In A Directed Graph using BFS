@@ -1,0 +1,27 @@
+#include <queue>
+int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+  vector<vector<int>> graph(n,vector<int>());
+  vector<int> inDegree(n);
+  //Making adj list and converting it into 0 base indexing.
+  for(auto it:edges){
+    graph[it.first-1].push_back(it.second-1);
+    inDegree[it.second-1]++;
+  }
+  queue<int> q;
+  for(int i=0;i<n;i++){
+    if(inDegree[i]==0) q.push(i);
+  }
+  int count=0; //No. of element in toposort.
+  while(!q.empty()){
+    int node=q.front();
+    q.pop();
+    count++;
+    for(auto it:graph[node]){
+      inDegree[it]--;
+      if(inDegree[it]==0) q.push(it);
+    }
+  }
+  if(count==n) return 0;
+  return 1;
+
+}
