@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isBipartite(vector<vector<int>>& graph) {
+        //Using BFS with color array and in place of visited array 
+        //i mark -1 in color array 
+        vector<int> color(graph.size(),-1);
+        queue<int> q;
+        for(int j=0;j<graph.size();j++){
+            if(color[j]==-1){
+                q.push(j);
+                color[0]=0;
+                while(!q.empty()){
+                    int node=q.front();
+                    q.pop();
+                    int c=color[node];
+                    int c1;
+                    if(color[node]==0) c1=1;
+                    else c1=0;
+        
+                    for(int i=0;i<graph[node].size();i++){
+                        if(color[graph[node][i]]==-1){
+                            q.push(graph[node][i]);
+                            color[graph[node][i]]=c1;
+                        }
+                        if(color[node]==color[graph[node][i]]) return false;
+                    }
+                }
+            }
+        }
+          return true;
+    }
+};
